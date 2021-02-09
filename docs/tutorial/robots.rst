@@ -196,37 +196,34 @@ it can be used as a scaffolding for code to be run in a Python script editor wit
 .. code-block:: python
 
     import compas
-    from compas.robots import GithubPackageMeshLoader
     from compas.robots import RobotModel
     import compas_blender
-    from compas_blender.artists import RobotModelArtist, BaseArtist
+    from compas_blender.artists import RobotModelArtist
 
-    compas_blender.clear()  # Delete all objects in the scene
+    compas_blender.clear()  # Delete all objects in the Blender scene
 
-    compas.PRECISION = '12f'
-    # Load the urdf-file from Github 
-    github = GithubPackageMeshLoader('ros-industrial/abb', 'abb_irb6600_support', 'kinetic-devel')
-    model = RobotModel.from_urdf_file(github.load_urdf('irb6640.urdf'))
-    model.load_geometry(github)
+    model = RobotModel('Robby')
+
+    # Add some geometry to Robby here
     
-    # Load the robot meshes into the blender scene
-    artist = RobotModelArtist(model, collection='COMPAS FAB::Example')
+    # Load the robot geometry into the blender scene
+    artist = RobotModelArtist(model, collection='COMPAS::Example Robot')
 
-Note that the blender ``RobotModelArtist`` is not as developed as the one for Rhino. 
-
-.. raw:: html
-
-    </div>
+Note that the blender ``RobotModelArtist`` is not as developed as the one for Rhino.
 
 .. raw:: html
 
     </div>
+
+.. raw:: html
+
     </div>
     </div>
+    </div>
 
 
 
-See below for a complete example in Rhino.
+See below for a complete example of how to programmatically create a Robotmodel.
 
 
 Building robots models

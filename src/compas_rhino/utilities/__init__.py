@@ -54,6 +54,19 @@ objects
     select_surface
     select_surfaces
 
+document
+====
+
+.. autosummary::
+    :toctree: generated/
+    :nosignatures:
+
+    get_document_basename
+    get_document_filename
+    get_document_extension
+    get_document_filepath
+    get_document_dirname
+
 
 drawing
 =======

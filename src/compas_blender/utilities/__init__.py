@@ -98,8 +98,7 @@ from .objects import *  # noqa: F401 F403
 from .collections import *  # noqa: F401 F403
 from .drawing import *  # noqa: F401 F403
 from .misc import *  # noqa: F401 F403
-from .annotating import *  # noqa: F401 F403  TODO: why does this break the sphynx-doc generation???
-# if this is uncommented sphinx fails to import any compas_blender modules...???
+from .annotating import *  # noqa: F401 F403
 
 
 __all__ = [name for name in dir() if not name.startswith('_')]

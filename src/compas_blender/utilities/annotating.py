@@ -1,5 +1,5 @@
-# import bpy
-import addon_utils
+import bpy
+import bpy.addon_utils as addon_utils
 
 
 """
@@ -54,18 +54,19 @@ def _disable_annotation_addon():
 
 def annotate_vertex(vertex, label, color=None, size=1):
     """Labels a specified vertex with a string or Number.
+    
     Parameters
-    -------
+    ----------
     vertex : Mesh vertex
         A mesh vertex
     label : str
     color : tuple, optional
     size : double, optional
 
-
-    Example
+    Examples
     -------
     .. code-block:: python
+
         import addon_utils
         import bpy
         print("    "*300)

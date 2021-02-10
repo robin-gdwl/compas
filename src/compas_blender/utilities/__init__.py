@@ -84,6 +84,8 @@ misc
 
 """
 
+from .annotating import *  # noqa: F401 F403  TODO: why does this break the sphynx-doc generation???
+                            # if this is uncommented sphinx fails to import any compas_blender modules...???
 from .data import *  # noqa: F401 F403
 from .document import *  # noqa: F401 F403
 from .objects import *  # noqa: F401 F403

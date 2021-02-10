@@ -9,7 +9,7 @@ This package contains low-level functions for working and interacting with Blend
 
 
 collections
-===========
+============
 Functions to manage Blender `collections <https://docs.blender.org/manual/en/latest/scene_layout/collections/collections.html>`_.
 
 .. autosummary::
@@ -23,7 +23,7 @@ Functions to manage Blender `collections <https://docs.blender.org/manual/en/lat
 
 
 data
-====
+=====
 
 .. autosummary::
     :toctree: generated/
@@ -31,7 +31,7 @@ data
     delete_unused_data
 
 document
-====
+=========
 
 .. autosummary::
     :toctree: generated/
@@ -45,7 +45,7 @@ document
 
 
 drawing
-=======
+========
 
 .. autosummary::
     :toctree: generated/
@@ -82,16 +82,24 @@ misc
 
     unload_modules
 
+annotating
+==========
+
+.. autosummary::
+    :toctree: generated/
+
+    annotate_vertex
+
 """
 
-from .annotating import *  # noqa: F401 F403  TODO: why does this break the sphynx-doc generation???
-                            # if this is uncommented sphinx fails to import any compas_blender modules...???
 from .data import *  # noqa: F401 F403
 from .document import *  # noqa: F401 F403
 from .objects import *  # noqa: F401 F403
 from .collections import *  # noqa: F401 F403
 from .drawing import *  # noqa: F401 F403
 from .misc import *  # noqa: F401 F403
+from .annotating import *  # noqa: F401 F403  TODO: why does this break the sphynx-doc generation???
+# if this is uncommented sphinx fails to import any compas_blender modules...???
 
 
 __all__ = [name for name in dir() if not name.startswith('_')]

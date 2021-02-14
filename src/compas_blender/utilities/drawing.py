@@ -358,9 +358,9 @@ def draw_cubes(cubes: List[Dict],
 
         Schema({
             'pos': And(list, lambda x: len(x) == 3),
-            'size': And(list, lambda x: len(x) == 3),
-            'rotation': And(list, lambda x: len(x) == 3),
-            Optional('name', default=''): str,
+            Optional('size', default=1): And(list, lambda x: len(x) == 3),
+            Optional('rotation', default=1): And(list, lambda x: len(x) == 3),
+            Optional('name', default='cube'): str,
             Optional('color', default=None): And(lambda x: len(x) == 3, all(0 <= y <= 1 for y in x)),
         })
     

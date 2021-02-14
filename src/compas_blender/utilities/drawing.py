@@ -343,9 +343,51 @@ def draw_cubes(cubes: List[Dict],
     Parameters
     -----------
     cubes : list of dict
-        A list af cubes as a dictionary with these keys: pos, size, name, color
     collection: either a string or a bpy.types.Collection
         The target collection of the cubes. Provide either the name of the collection or the bpy object.
+    
+    Returns
+    -------
+    list of blender objects
+
+    Notes
+    -----
+    A box dict has the following schema:
+
+    .. code-block:: python
+
+        Schema({
+            'pos': And(list, lambda x: len(x) == 3),
+            'size': And(list, lambda x: len(x) == 3),
+            'rotation': And(list, lambda x: len(x) == 3),
+            Optional('name', default=''): str,
+            Optional('color', default=None): And(lambda x: len(x) == 3, all(0 <= y <= 1 for y in x)),
+        })
+    
+    Examples
+    --------
+    Draws a specified number of cubes with random position, size, roation and color. 
+
+    .. code-block:: python
+        
+        import random, math
+        import compas_blender
+
+        number_of_cubes = 30
+        max_pos = 20  # maximum possible distance of each cube from the origin
+        max_size = 10 
+        list_of_cube_dicts = []
+        for i in range(number_of_cubes):
+            # Generate random values for each cube
+            c_dict = {}
+            c_dict['pos'] = [random.uniform(-max_pos, max_pos) for _ in range(3)]
+            c_dict['size'] = random.uniform(-max_size, max_size)
+            c_dict['rotation'] = [random.uniform(-math.pi, math.pi) for _ in range(3)]
+            c_dict['color'] = [random.uniform(0, 1) for _ in range(3)]
+            c_dict['name'] = "Cube_" + str(i)
+            list_of_cube_dicts.append(c_dict)
+
+        compas_blender.draw_cubes(list_of_cube_dicts)
     """
     bpy.ops.mesh.primitive_cube_add(size=1, location=[0, 0, 0])
     empty = bpy.context.object
@@ -354,7 +396,8 @@ def draw_cubes(cubes: List[Dict],
     for index, data in enumerate(cubes):
         obj = empty.copy()
         obj.location = data['pos']
-        obj.scale *= data.get('size', 1)  # TODO is it good to use the blender vector type here? it is probably better to allow for the use of other enumerators. 
+        obj.scale *= data.get('size', 1)
+        obj.rotation_euler = data.get('rotation', (0.6,0.44,0))
         obj.name = data.get('name', 'cube')
         rgb = data.get('color', [1.0, 1.0, 1.0])
         _set_object_color(obj, rgb)

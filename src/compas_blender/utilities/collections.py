@@ -66,6 +66,7 @@ def create_collections_from_path(path: Text, separator: Text = '::') -> List[bpy
     -------
     list of :class:`bpy.types.Collection`
     """
+
     names = path.split(separator)
     collections = []
     parent = None
@@ -78,9 +79,10 @@ def create_collections_from_path(path: Text, separator: Text = '::') -> List[bpy
 
 def clear_collection(name: Text):
     """Clear the objects from a collection."""
-    objects = list(bpy.data.collections[name].objects)
-    if objects:
-        delete_objects(objects)
+    if name in bpy.data.collections.keys():
+        objects = list(bpy.data.collections[name].objects)
+        if objects:
+            delete_objects(objects)
 
 
 def clear_collections(collections: List[bpy.types.Collection]):

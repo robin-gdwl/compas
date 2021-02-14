@@ -31,6 +31,7 @@ Classes
 
 from ._artist import *  # noqa: F401 F403
 
+from .boxartist import *  # noqa: F401 F403
 from .networkartist import *  # noqa: F401 F403
 from .meshartist import *  # noqa: F401 F403
 from .robotmodelartist import *  # noqa: F401 F403

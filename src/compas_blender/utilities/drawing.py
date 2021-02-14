@@ -7,6 +7,7 @@ from compas_blender.utilities import create_collection
 from compas.geometry import centroid_points
 from compas.geometry import distance_point_point
 from compas.geometry import subtract_vectors
+from compas.geometry import Vector
 
 
 __all__ = [
@@ -337,7 +338,15 @@ def draw_spheres(spheres: List[Dict],
 
 def draw_cubes(cubes: List[Dict],
                collection: Union[Text, bpy.types.Collection] = None) -> List[bpy.types.Object]:
-    """Draw cube objects as mesh primitives."""
+    """Draw cube objects as mesh primitives.
+    
+    Parameters
+    -----------
+    cubes : list of dict
+        A list af cubes as a dictionary with these keys: pos, size, name, color
+    collection: either a string or a bpy.types.Collection
+        The target collection of the cubes. Provide either the name of the collection or the bpy object.
+    """
     bpy.ops.mesh.primitive_cube_add(size=1, location=[0, 0, 0])
     empty = bpy.context.object
     _link_object(empty, collection)
@@ -345,7 +354,7 @@ def draw_cubes(cubes: List[Dict],
     for index, data in enumerate(cubes):
         obj = empty.copy()
         obj.location = data['pos']
-        obj.scale *= data.get('size', 1)
+        obj.scale *= data.get('size', 1)  # TODO is it good to use the blender vector type here? it is probably better to allow for the use of other enumerators. 
         obj.name = data.get('name', 'cube')
         rgb = data.get('color', [1.0, 1.0, 1.0])
         _set_object_color(obj, rgb)

@@ -1,6 +1,7 @@
 import bpy
-import bpy.addon_utils as addon_utils
 
+# import bpy.addon_utils as addon_utils
+import addon_utils as addon_utils
 
 """
 A way to annotate vertices and edges in blender
@@ -67,17 +68,30 @@ def annotate_vertex(vertex, label, color=None, size=1):
     -------
     .. code-block:: python
 
-        import addon_utils
-        import bpy
-        print("    "*300)
-        result = addon_utils.enable("measureit")
-        print(result)
-        #result = addon_utils.disable("measureit")
-        print(result)
-        a_mesh = bpy.data.objects["Cube"]
-        print(type(a_mesh))
-        print(a_mesh.items())
-        print(a_mesh.data)
+    import addon_utils
+    import bpy
+    print("    "*300)
+    result = addon_utils.enable("measureit")
+    print(result)
+    #result = addon_utils.disable("measureit")
+    print(result)
+    a_mesh = bpy.data.objects["Cube"]
+    print(type(a_mesh))
+    print(a_mesh.items())
+    print(a_mesh.data.vertices)
+
+    bpy.ops.object.mode_set(mode = 'OBJECT')
+    bpy.ops.object.select_all(action='DESELECT')
+    bpy.ops.object.mode_set(mode = 'EDIT')
+    bpy.ops.mesh.select_mode(type="VERT") 
+    for vert in a_mesh.data.vertices: 
+        vert.select = True
+        print(vert)
+        obj = bpy.context.active_object
+        print(obj)
+        bpy.ops.measureit.addlabel()
+        pass
+
 
     """
     pass

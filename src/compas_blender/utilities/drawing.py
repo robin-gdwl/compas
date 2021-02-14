@@ -7,7 +7,6 @@ from compas_blender.utilities import create_collection
 from compas.geometry import centroid_points
 from compas.geometry import distance_point_point
 from compas.geometry import subtract_vectors
-from compas.geometry import Vector
 
 
 __all__ = [
@@ -339,13 +338,14 @@ def draw_spheres(spheres: List[Dict],
 def draw_cubes(cubes: List[Dict],
                collection: Union[Text, bpy.types.Collection] = None) -> List[bpy.types.Object]:
     """Draw cube objects as mesh primitives.
-    
+
     Parameters
     -----------
     cubes : list of dict
+        A List of cube dictionaries, see below for the schema.
     collection: either a string or a bpy.types.Collection
         The target collection of the cubes. Provide either the name of the collection or the bpy object.
-    
+
     Returns
     -------
     list of blender objects
@@ -363,19 +363,27 @@ def draw_cubes(cubes: List[Dict],
             Optional('name', default='cube'): str,
             Optional('color', default=None): And(lambda x: len(x) == 3, all(0 <= y <= 1 for y in x)),
         })
-    
+
     Examples
     --------
-    Draws a specified number of cubes with random position, size, roation and color. 
+    Minimal Example:
 
     .. code-block:: python
-        
+
+        import compas_blender
+        cubedict = {'pos':box_location, 'size':3, 'rotation':(0.5, 1, 0.64) 'color':(0, 1, 0)}
+        compas_blender.draw_cubes([cubedict])
+
+    Draw a specified number of cubes with random position, size, roation and color:
+
+    .. code-block:: python
+
         import random, math
         import compas_blender
 
         number_of_cubes = 30
         max_pos = 20  # maximum possible distance of each cube from the origin
-        max_size = 10 
+        max_size = 10
         list_of_cube_dicts = []
         for i in range(number_of_cubes):
             # Generate random values for each cube
@@ -397,7 +405,7 @@ def draw_cubes(cubes: List[Dict],
         obj = empty.copy()
         obj.location = data['pos']
         obj.scale *= data.get('size', 1)
-        obj.rotation_euler = data.get('rotation', (0.6,0.44,0))
+        obj.rotation_euler = data.get('rotation', (0, 0, 0))
         obj.name = data.get('name', 'cube')
         rgb = data.get('color', [1.0, 1.0, 1.0])
         _set_object_color(obj, rgb)

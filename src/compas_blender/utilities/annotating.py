@@ -1,11 +1,11 @@
-import bpy
-
+# import bpy
 # import bpy.addon_utils as addon_utils
-import addon_utils as addon_utils
+# import addon_utils as addon_utils
 
 """
 A way to annotate vertices and edges in blender
-uses the MeasureIt plugin
+uses the MeasureIt plugin instead of creating a text object with geometry as the current utility function.
+
 TODO: not sure if programmatically enabling a plugin in Blender is a good idea in general...
     It should work since the MeasureIt-Addon comes bundled with Blender and is rather robust.
 """
@@ -29,7 +29,7 @@ def _enable_annotation_addon():
 
     if addon_utils.enable("MeasureIt"):
         isloaded = True
-    else: 
+    else:
         isloaded = False
 
     return isloaded
@@ -38,7 +38,7 @@ def _enable_annotation_addon():
 def _disable_annotation_addon():
     """Disables the MeasureIt addon
     See here for documentation: https://docs.blender.org/manual/en/2.91/addons/3d_view/measureit.html
-    
+
     Returns
     -------
     True if the addon is still loaded, otherwise False
@@ -55,7 +55,7 @@ def _disable_annotation_addon():
 
 def annotate_vertex(vertex, label, color=None, size=1):
     """Labels a specified vertex with a string or Number.
-    
+
     Parameters
     ----------
     vertex : Mesh vertex
@@ -83,23 +83,21 @@ def annotate_vertex(vertex, label, color=None, size=1):
     bpy.ops.object.mode_set(mode = 'OBJECT')
     bpy.ops.object.select_all(action='DESELECT')
     bpy.ops.object.mode_set(mode = 'EDIT')
-    bpy.ops.mesh.select_mode(type="VERT") 
-    for vert in a_mesh.data.vertices: 
+    bpy.ops.mesh.select_mode(type="VERT")
+    for vert in a_mesh.data.vertices:
         vert.select = True
         print(vert)
         obj = bpy.context.active_object
         print(obj)
         bpy.ops.measureit.addlabel()
         pass
-
-
     """
-    pass
-
+    raise NotImplementedError
 
 # ==============================================================================
 # Main
 # ==============================================================================
+
 
 if __name__ == '__main__':
     pass

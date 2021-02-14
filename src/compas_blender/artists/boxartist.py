@@ -40,7 +40,7 @@ class BoxArtist(ShapeArtist):
             artist.draw()
     """
 
-    def draw(self, alpha = 1.0):
+    def draw(self, alpha=1.0):
         """Draw the box associated with the artist.
 
         Parameters
@@ -76,7 +76,7 @@ class BoxArtist(ShapeArtist):
         # cubedict = {"pos":box_location, "size":3, "color":self.color}
         # compas_blender.draw_cubes([cubedict])
 
-        return [ created_box ]
+        return [created_box]
 
 
 # ==============================================================================

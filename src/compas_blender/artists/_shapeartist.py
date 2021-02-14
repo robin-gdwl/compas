@@ -63,8 +63,6 @@ class ShapeArtist(BaseArtist):
         if self.layer:
             compas_blender.clear_collection(self.collection)
 
-    
-
 
 # ==============================================================================
 # Main
